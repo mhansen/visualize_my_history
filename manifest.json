@@ -10,8 +10,7 @@
             "48": "icon48.png",
             "128": "icon128.png"
         },
-        "default_title": "Visualize My History",
-        "default_popup": "index.html"
+        "default_title": "Visualize My History"
     },
     "icons": {
         "16": "icon16.png",
@@ -22,5 +21,10 @@
         "history"
     ],
     "offline_enabled": true,
-    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+    "background": {
+        "scripts": [
+            "bg.js"
+        ]
+    }
 }
