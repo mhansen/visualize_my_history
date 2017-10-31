@@ -1,12 +1,17 @@
 {
-"update_url":"http://clients2.google.com/service/update2/crx",
+    "manifest_version": 2,
+    "update_url": "http://clients2.google.com/service/update2/crx",
     "name": "Visualize My History",
     "version": "0.0.2",
     "description": "Visualize your browsing history with a scattergraph of all your browsing.",
-    "app": {
-        "launch": {
-            "local_path": "index.html"
-        }
+    "browser_action": {
+        "default_icon": {
+            "16": "icon16.png",
+            "48": "icon48.png",
+            "128": "icon128.png"
+        },
+        "default_title": "Visualize My History",
+        "default_popup": "index.html"
     },
     "icons": {
         "16": "icon16.png",
