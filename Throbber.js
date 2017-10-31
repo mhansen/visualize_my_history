@@ -1,15 +1,10 @@
-
 window.hv = window.hv || {};
-
 window.hv.Throbber = Backbone.View.extend({
-  initialize: function(options) {
-    var _this = this;
+  initialize(options) {
     this.model = options.model;
-    return this.model.bind("change:throbbing", function() {
-      return _this.render();
-    });
+    return this.model.bind("change:throbbing", () => this.render());
   },
-  render: function() {
+  render() {
     if (this.model.get("throbbing")) {
       return $(this.el).show();
     } else {

@@ -1,15 +1,10 @@
-
 window.hv = window.hv || {};
-
-window.hv.LoadingView = Backbone.View.extend({
-  initialize: function(options) {
-    var _this = this;
+window.hv.LoadingView= Backbone.View.extend({
+  initialize(options) {
     this.model = options.model;
-    return this.model.bind("change", function() {
-      return _this.render();
-    });
+    return this.model.bind("change", () => this.render());
   },
-  render: function() {
+  render() {
     if (this.model.get("loading")) {
       return $(this.el).show().text(this.model.get("loadingText"));
     } else {
