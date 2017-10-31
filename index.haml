@@ -1,0 +1,43 @@
+!!! 5
+%html
+  %head 
+    %meta(charset="utf-8")
+    %link(rel="stylesheet" href="lib/bootstrap.css")
+    %link(rel="stylesheet" href="style.css")
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.brand
+            %img#throbber(src="throbber.gif")
+            Visualize My History
+    .container
+      .row
+        .sidebar.span3
+          .well
+            %h5 Top 100 Domains
+            %ul#legend
+        .content.span9
+          #loadingMessage
+          %svg#graph(style="display:none")
+
+    %script(src="lib/xdate.js")
+    %script(src="lib/d3.js")
+    %script(src="lib/d3.time.min.js")
+    %script(src="lib/jquery-1.7.min.js")
+    %script(src="lib/underscore-min.js")
+    %script(src="lib/backbone-min.js")
+    %script(src="lib/bootstrap.js")
+    %script(src="LoadingView.js")
+    %script(src="Graph.js")
+    %script(src="index.js")
+    :javascript
+      _gaq = [['_setAccount', 'UA-30148158-1'],
+              ['_trackPageview']];
+      (function () {
+        var ga = document.createElement('script');
+        ga.async = true;
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+      })();

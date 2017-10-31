@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <link href='lib/bootstrap.css' rel='stylesheet' />
+    <link href='style.css' rel='stylesheet' />
+  </head>
+  <body>
+    <div class='navbar navbar-fixed-top'>
+      <div class='navbar-inner'>
+        <div class='container'>
+          <a class='brand'>
+            <img id='throbber' src='throbber.gif' />
+            Visualize My History
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class='container'>
+      <div class='row'>
+        <div class='sidebar span3'>
+          <div class='well'>
+            <h5>Top 100 Domains</h5>
+            <ul id='legend'></ul>
+          </div>
+        </div>
+        <div class='content span9'>
+          <div id='loadingMessage'></div>
+          <svg id='graph' style='display:none'></svg>
+        </div>
+      </div>
+    </div>
+    <script src='lib/xdate.js'></script>
+    <script src='lib/d3.js'></script>
+    <script src='lib/d3.time.min.js'></script>
+    <script src='lib/jquery-1.7.min.js'></script>
+    <script src='lib/underscore-min.js'></script>
+    <script src='lib/backbone-min.js'></script>
+    <script src='lib/bootstrap.js'></script>
+    <script src='LoadingView.js'></script>
+    <script src='Graph.js'></script>
+    <script src='index.js'></script>
+    <script type='text/javascript'>
+      //<![CDATA[
+        _gaq = [['_setAccount', 'UA-30148158-1'],
+                ['_trackPageview']];
+        (function () {
+          var ga = document.createElement('script');
+          ga.async = true;
+          ga.src = 'https://ssl.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(ga, s);
+        })();
+      //]]>
+    </script>
+  </body>
+</html>
