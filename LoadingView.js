@@ -6,9 +6,10 @@ window.hv.LoadingView= Backbone.View.extend({
   },
   render() {
     if (this.model.get("loading")) {
-      $(this.el).show().text(this.model.get("loadingText"));
+      this.el.style.display = 'block';
+      this.el.textContent = this.model.get("loadingText");
     } else {
-      $(this.el).hide();
+      this.el.style.display = 'none';
     }
   }
 });
