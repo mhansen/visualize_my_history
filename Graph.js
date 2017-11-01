@@ -28,7 +28,6 @@ window.hv.Graph = Backbone.View.extend({
         this.model.set({loadingText: 'Attaching popovers...'});
         setTimeout(() => {
           this.renderPopovers();
-          $(this.el).slideDown();
           // Done! Signal that we're done loading.
           this.model.set({loading: false});
         }, 0);
