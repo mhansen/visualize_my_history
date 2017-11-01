@@ -16,24 +16,24 @@ window.hv.Graph = Backbone.View.extend({
     // so it can update its UI to reflect the new messages and new data. This
     // stops the browser from becoming unresponsive.
     this.model.set({loadingText: 'Processing...'});
-    return _.defer(() => {
+    setTimeout(() => {
       this.reticulateSplines();
       this.model.set({loadingText: 'Drawing...'});
-      return _.defer(() => {
+      setTimeout(() => {
         this.renderLegend();
         this.renderSVGElement();
         this.renderXAxis();
         this.renderYAxis();
         this.renderDataDots();
         this.model.set({loadingText: 'Attaching popovers...'});
-        return _.defer(() => {
+        setTimeout(() => {
           this.renderPopovers();
           $(this.el).slideDown();
           // Done! Signal that we're done loading.
-          return this.model.set({loading: false});
-        });
-      });
-    });
+          this.model.set({loading: false});
+        }, 0);
+      }, 0);
+    }, 0);
   },
 
   reticulateSplines() { // Do generic ahead-of-time computations.
