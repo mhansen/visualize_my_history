@@ -280,8 +280,8 @@ ${d.getHours()}:${mins}
       placement: "right",
       placement(tip, element) {
         let offset = $(element).offset();
-        let height = $(document).outerHeight();
-        let width = $(document).outerWidth();
+        let height = document.offsetHeight;
+        let width = document.offsetWidth;
         let vert = (0.5 * height) - offset.top;
         let vertPlacement = vert > 0 ? 'bottom' : 'top';
         let horiz = (0.5 * width) - offset.left;
