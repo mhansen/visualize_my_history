@@ -2,8 +2,8 @@ window.hv = window.hv || {};
 window.hv.Graph = Backbone.View.extend({
   initialize(options) {
     this.model = options.model;
-    return this.model.bind("change:allVisits", () => {
-      return this.render();
+    this.model.bind("change:allVisits", () => {
+      this.render();
     });
   },
   leftPadding: 40,       // px
@@ -55,7 +55,10 @@ window.hv.Graph = Backbone.View.extend({
 
     let extract_hostname = function(url) {
       let m = url.match(/^([^:]*:\/\/[^\/]*)/);
-      if (m) { return m[1]; } else { return "None"; }
+      if (!m) {
+        return "None";
+      }
+      return m[1];
     };
 
     let m = 2; // minutes per graph point - it's clustering, essentially.
@@ -64,7 +67,9 @@ window.hv.Graph = Backbone.View.extend({
     // show the datapoints inside the same visual rectangle.
     this.timeKey = function(d) {
       let mins = Math.floor(d.getMinutes()/m)*m;
-      if (mins < 10) { mins = `0${mins}`; }
+      if (mins < 10) {
+        mins = `0${mins}`;
+      }
       return `\
 ${d.getHours()}:${mins}
 (${d.getDate()} ${d3.time.format('%b')(d)} ${d.getFullYear()})\
@@ -89,7 +94,7 @@ ${d.getHours()}:${mins}
       this.colors[this.hostnames[i].key] = distinguishable_colors[i] || "gray";
     }
 
-    return this.colorfn = d => {
+    this.colorfn = d => {
       // There could be a lot of hostnames inside one data point, because
       // we're clustering them together. We still need to decide on one
       // color for the datapoint. We arbitrarily go with the color of the
@@ -106,7 +111,7 @@ ${d.getHours()}:${mins}
       .range([0, 130]);
 
     // Draw the legend
-    return d3.select("#legend")
+    d3.select("#legend")
       .selectAll("li")
       .data(_(this.hostnames).first(this.num_legend_items))
       .enter()
@@ -125,7 +130,7 @@ ${d.getHours()}:${mins}
 
   renderSVGElement() {
     $(this.el).children().remove();
-    return d3.select(this.el)
+    d3.select(this.el)
       .attr("viewBox", `${-this.leftPadding} ${-this.topPadding} ` +
                        ` ${this.width} ${this.height + this.bottomPadding}`)
       .attr("preserveAspectRatio", "none")
@@ -159,7 +164,7 @@ ${d.getHours()}:${mins}
       .attr("x", this.x)
       .text(d3.time.format("%B"));
 
-    return xaxisData.append("line")
+    xaxisData.append("line")
       .attr("y1", -20)
       .attr("y2", 0)
       .attr("x1", this.x)
@@ -194,13 +199,14 @@ ${d.getHours()}:${mins}
       .text(function(d) {
         if (d < 12) {
           return d + "am";
-        } else if (d > 13) {
+        }
+        if (d > 13) {
           return (d - 12) + "pm";
-        } else {
-          return d + "pm";
-        }});
+        }
+        return d + "pm";
+      });
 
-    return yaxisData.append("line")
+    yaxisData.append("line")
       .attr("x1", -5)
       .attr("x2", 0)
       .attr("y1", d => this.height * (d / 24))
@@ -239,14 +245,16 @@ ${d.getHours()}:${mins}
       .attr("width", 5)
       .attr("height", 2)
       .attr("fill", this.colorfn);
-    return console.timeEnd("drawing");
+    console.timeEnd("drawing");
   },
 
   renderPopovers() {
     // Hook up the mouse hover popovers
     console.time("popover");
     this.$("rect.entry").popover({
-      title() { return this.__data__.key; },
+      title() {
+        return this.__data__.key;
+      },
       content() {
         return "<ul>" +
           this.__data__.values.map(d =>
@@ -274,6 +282,6 @@ ${d.getHours()}:${mins}
       },
       offset: 2
     });
-    return console.timeEnd("popover");
+    console.timeEnd("popover");
   }
 });

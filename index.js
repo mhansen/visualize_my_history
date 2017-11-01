@@ -30,7 +30,7 @@ chrome.history.search({
 , function(historyItems) {
   let allVisits = [];
   let c = historyItems.length;
-  return historyItems.forEach(historyItem =>
+  historyItems.forEach(historyItem =>
     chrome.history.getVisits({url: historyItem.url}, function(visits) {
       for (let visit of Array.from(visits)) {
         visit.historyItem = historyItem;
@@ -48,7 +48,7 @@ chrome.history.search({
       if (c === 0) {
         console.timeEnd("Getting historyItems");
         console.profileEnd("Getting historyItems");
-        return appModel.set({allVisits});
+        appModel.set({allVisits});
       }
     })
   );
