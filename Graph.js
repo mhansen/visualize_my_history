@@ -139,7 +139,9 @@ ${d.getHours()}:${mins}
   },
 
   renderSVGElement() {
-    $(this.el).children().remove();
+    while (this.el.firstChild) {
+      this.el.removeChild(this.el.firstChild);
+    }
     d3.select(this.el)
       .attr("viewBox", `${-this.leftPadding} ${-this.topPadding} ` +
                        ` ${this.width} ${this.height + this.bottomPadding}`)
