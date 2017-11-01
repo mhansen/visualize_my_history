@@ -42,7 +42,7 @@ window.hv.Graph = Backbone.View.extend({
     this.maxDay = _.max(this.allVisits, d => d.visitTime).day;
 
     // Scales
-    this.x = d3.scale.linear()
+    this.x = d3.scaleLinear()
       .domain([new XDate(this.minDay).addDays(-1), this.maxDay])
       .range([0, this.width]);
 
@@ -106,7 +106,7 @@ ${d.getHours()}:${mins}
 
   renderLegend() {
     let most_visited_hostname = this.hostnames[0];
-    let barsize = d3.scale.linear()
+    let barsize = d3.scaleLinear()
       .domain([0, most_visited_hostname.values.length])
       .range([0, 130]);
 
@@ -115,16 +115,26 @@ ${d.getHours()}:${mins}
       .selectAll("li")
       .data(_(this.hostnames).first(this.num_legend_items))
       .enter()
-      .append("li")
-      .html(d => {
-        return `\
-<a href='${_.escape(d.key)}'>${_.escape(d.key)}</a>
-<span class='bar'
-      style='width: ${barsize(d.values.length)}px;
-              background-color: ${this.colors[d.key]};'>
-</span>
-<span class='count'>x${d.values.length}</span>\
-`;
+      .append(d => {
+        let li = document.createElement('li');
+
+        let a = document.createElement('a');
+        a.href = d.key;
+        a.textContent = d.key;
+
+        let span1 = document.createElement('span');
+        span1.className = 'bar';
+        span1.style.width = barsize(d.values.length) + 'px';
+        span1.style.backgroundColor = this.colors[d.key];
+
+        let span2 = document.createElement('span');
+        span2.className = 'count';
+        span2.textContent = d.values.length;
+
+        li.appendChild(a);
+        li.appendChild(span1);
+        li.appendChild(span2);
+        return li;
       });
   },
 
