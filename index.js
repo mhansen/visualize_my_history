@@ -53,10 +53,3 @@ chrome.history.search({
     })
   );
 });
-
-_gaq = [['_setAccount', 'UA-30148158-1'], ['_trackPageview']];
-var ga = document.createElement('script');
- ga.async = true;
-ga.src = 'https://ssl.google-analytics.com/ga.js';
-var s = document.getElementsByTagName('script')[0];
-s.parentNode.insertBefore(ga, s);
